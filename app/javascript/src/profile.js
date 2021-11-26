@@ -16,7 +16,9 @@ const handleClick = (event) => {
   changeButtonClass(buttonElement);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('turbolinks:load', function () {
   const buttonElement = document.getElementById("click-me");
-  buttonElement.addEventListener("click", handleClick);
+  if (buttonElement) {
+    buttonElement.addEventListener("click", handleClick);
+  }
 })

@@ -7,7 +7,9 @@ const handleLike = (event) => {
   changeLikeIconColor(iconElement);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('turbolinks:load', function () {
   const iconElement = document.getElementById("like");
-  iconElement.addEventListener("click", handleLike);
+  if (iconElement) {
+    iconElement.addEventListener("click", handleLike);
+  }
 })
