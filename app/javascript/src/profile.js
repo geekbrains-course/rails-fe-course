@@ -1,13 +1,12 @@
-const getButtonColorClass = () => {
+const getButtonColor = () => {
   const colors = ["green", "blue", "red"];        
   const index = Math.floor(Math.random() * colors.length);  
  
-  return `button--${colors[index]}`;
+  return colors[index];
 }
 
-const changeButtonClass = (buttonElement) => {
-  const colorClass = getButtonColorClass();
-  const className = `button ${colorClass}`;
+const changeButtonClass = (buttonElement, color) => {
+  const className = `button button--${color}`;
   buttonElement.className = className;
 }
 
