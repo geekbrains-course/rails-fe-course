@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit update destroy, like ]
 
   # GET /posts or /posts.json
   def index
@@ -53,6 +53,17 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  # POST /posts/1/like
+  def like
+    respond_to do |format|
+      if @post.like!
+        format.json { head :ok }
+      else
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
     end
   end
 
