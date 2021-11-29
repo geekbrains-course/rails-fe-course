@@ -2,7 +2,9 @@ import RailsLogoSVG from "../../assets/images/rails_logo.svg";
 
 window.addEventListener('turbolinks:load', function () {
   const logoElement = document.getElementById("logo");
-  logoElement.src = RailsLogoSVG;
+  if (logoElement) {
+    logoElement.src = RailsLogoSVG;
+  }
 })
 
 const getButtonColor = () => {
@@ -45,16 +47,16 @@ window.addEventListener('turbolinks:load', function () {
   }
 })
 
-const buildData = {name: "John", surname: "Doe"};
+// const buildData = {name: "John", surname: "Doe"};
 
-const buildPerson = (data) => {
-  console.log("started buildPerson");
-  // debugger
-  const person = {firstName: data.name, lastName: data.surname};
-  console.log("finishing buildPerson");
-  return person;
- }
+// const buildPerson = (data) => {
+//   console.log("started buildPerson");
+//   // debugger
+//   const person = {firstName: data.name, lastName: data.surname};
+//   console.log("finishing buildPerson");
+//   return person;
+//  }
 
-console.log("before buildPerson call");
-const person = buildPerson();
-console.log("buildPerson result: ", person);
+// console.log("before buildPerson call");
+// const person = buildPerson();
+// console.log("buildPerson result: ", person);
