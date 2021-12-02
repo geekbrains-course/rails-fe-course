@@ -1,1 +1,0 @@
-json.likes @amount_likes

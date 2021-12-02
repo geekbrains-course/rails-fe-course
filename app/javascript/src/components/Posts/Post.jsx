@@ -7,10 +7,11 @@ import Likes from '../Likes/Likes'
 const Post = props => {
   const { id } = useParams();
   const [name, setName] = React.useState('None');
+  const [title, setTitle] = React.useState('None');
   const [desc, setDesc] = React.useState('Empty');
 
   React.useEffect(() => {
-    fetch(`/api/v1/posts/${id}`, {
+    fetch(`/posts/${id}.json`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +20,8 @@ const Post = props => {
     .then(response => response.json())
     .then(data => {
       setName(data.name);
-      setDesc(data.description);
+      //setTitle(data.title);
+      //setDesc(data.content);
       console.log('Success:', data);
     })
     .catch((error) => {
@@ -29,7 +31,12 @@ const Post = props => {
 
   return (
     <Card className='text-center'>
-      <Card.Header>Post: {name}</Card.Header>
+      <Card.Header>
+        <div>
+          <p> Name: {name} </p>
+          <p> Title: {title} </p>
+        </div>
+      </Card.Header>
       <Card.Body>
         <Card.Text>
           {desc}

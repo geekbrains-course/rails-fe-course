@@ -7,7 +7,7 @@ const Likes = props => {
   const token = document.querySelector('meta[name="csrf-token"]').content;
 
   React.useEffect(() => {
-    fetch(`/api/v1/likes?post_id=${props.postId}`, {
+    fetch(`/posts/${props.postId}/likes`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -24,15 +24,12 @@ const Likes = props => {
   }, []);
 
   const handleNewLike = (e) => {
-    fetch('/api/v1/likes/', {
+    fetch(`/posts/${props.postId}/like/`, {
       method: 'POST',
       headers: {
         'X-CSRF-Token': token,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        post_id: props.postId
-      })
     })
     .then(response => response.json())
     .then(data => {
