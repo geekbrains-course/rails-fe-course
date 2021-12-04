@@ -5,7 +5,8 @@ import Post from '../components/Posts/Post';
 
 const App = () => {
   return <BrowserRouter>
-           <Route exact path="/posts/:id" component={Post} />
+           <Route exact path="/posts/:id([0-9])" component={Post} />
          </BrowserRouter>
 }
+
 export default App;
