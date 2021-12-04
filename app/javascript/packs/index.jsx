@@ -5,6 +5,11 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import 'bootstrap';
+import "trix"
+import "@rails/actiontext"
+import "src/profile.js"
+import "src/post.js"
 
 Rails.start()
 Turbolinks.start()
