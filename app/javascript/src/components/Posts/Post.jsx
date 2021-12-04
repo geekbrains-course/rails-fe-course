@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Card } from 'react-bootstrap'
 import CommentBox from '../Comments/CommentBox'
 import { useParams } from 'react-router-dom';
-import Likes from '../Likes/Likes'
+import Likes from '../Likes/Likes';
+import contentParser from 'html-react-parser';
 
 const Post = props => {
   const { id } = useParams();
@@ -20,8 +21,8 @@ const Post = props => {
     .then(response => response.json())
     .then(data => {
       setName(data.name);
-      //setTitle(data.title);
-      //setDesc(data.content);
+      setTitle(data.title);
+      setDesc(data.content.body || 'Empty');
       console.log('Success:', data);
     })
     .catch((error) => {
@@ -39,7 +40,7 @@ const Post = props => {
       </Card.Header>
       <Card.Body>
         <Card.Text>
-          {desc}
+          {contentParser(desc)}
         </Card.Text>
       </Card.Body>
       <Card.Footer className='text-muted'>
