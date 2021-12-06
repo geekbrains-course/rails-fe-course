@@ -31,18 +31,14 @@ const Post = props => {
   }, []);
 
   return (
-    <div class="container">
+    <div className="container">
       <Card className='text-center'>
         <Card.Header>
-          <div>
-            <p> Name: {name} </p>
-            <p> Title: {title} </p>
-          </div>
+          <div> Name: {name} </div>
+          <div> Title: {title} </div>
         </Card.Header>
         <Card.Body>
-          <Card.Text>
-            {contentParser(desc)}
-          </Card.Text>
+          {contentParser(desc)}
         </Card.Body>
         <Card.Footer className='text-muted'>
           <CommentBox url='/api/v1/comments' post_id={id} />
