@@ -10,7 +10,7 @@ class CommentForm extends React.Component {
     e.preventDefault();
     let text = e.target[0].value;
     if(!text) {
-      alert("Please enter your name and comment");
+      alert("Please enter your comment");
       return;
     }
     this.props.onCommentSubmit({text:text});
