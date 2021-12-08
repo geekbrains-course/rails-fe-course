@@ -57,6 +57,7 @@ class CommentBox extends React.Component {
           <div className="panel-body">
             <h1>Comment Box</h1>
             <Comments comments={this.state.comments} />
+            <br/>
             <CommentForm onCommentSubmit={this.handleCommentSubmit.bind(this)} />
           </div>
         </div>

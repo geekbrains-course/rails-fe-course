@@ -6,7 +6,10 @@ module Api
       end
 
       def create
-        comment = Comment.create(comment_params)
+        comment = Comment.new(comment_params)
+        comment.author = current_user.email
+        comment.save
+
         render json: comment
       end
 
@@ -17,7 +20,7 @@ module Api
       private
 
       def comment_params
-        params.require(:comment).permit(:author, :text, :post_id)
+        params.require(:comment).permit(:text, :post_id)
       end
     end
   end

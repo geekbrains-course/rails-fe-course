@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy like, likes ]
+  before_action :set_post, only: %i[ show edit update destroy like likes ]
 
   # GET /posts or /posts.json
   def index
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
   def like
     respond_to do |format|
       if @post.like!
-        format.json { head :ok }
+        format.json { render json: { likes: @post.likes_count }}
       else
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end

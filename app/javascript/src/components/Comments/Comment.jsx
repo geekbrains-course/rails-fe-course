@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card } from 'react-bootstrap'
 
 class Comment extends React.Component {
   constructor(props) {
@@ -6,14 +7,18 @@ class Comment extends React.Component {
   }
   render() {
     return (
-     <div className="comment panel panel-default">
-        <div className="panel-heading">
-          <h4>{this.props.author}</h4>
-        </div>
-        <div className="panel-body">
-          {this.props.children}
-        </div>
-      </div>
+      <Card
+        bg='primary'
+        text='light'
+        style={{ margin: 10 }}
+      >
+        <Card.Header>{this.props.author}</Card.Header>
+        <Card.Body>
+          <Card.Text>
+            {this.props.children}
+          </Card.Text>
+        </Card.Body>
+      </Card>
     );
   }
 }
