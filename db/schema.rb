@@ -50,6 +50,9 @@ ActiveRecord::Schema.define(version: 2021_11_29_083226) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "posts", force: :cascade do |t|
     t.string "name"
     t.string "title"
