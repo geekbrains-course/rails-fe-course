@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_12_02_165859) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -25,8 +28,8 @@ ActiveRecord::Schema.define(version: 2021_12_02_165859) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -45,7 +48,7 @@ ActiveRecord::Schema.define(version: 2021_12_02_165859) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -63,9 +66,8 @@ ActiveRecord::Schema.define(version: 2021_12_02_165859) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "name"
-    t.string "title"
-    t.text "content"
+    t.string "title", comment: "Post's title"
+    t.text "content", comment: "Post's body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "likes_count", default: 0
@@ -79,7 +81,7 @@ ActiveRecord::Schema.define(version: 2021_12_02_165859) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "info"
+    t.string "info", comment: "User's bio"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
