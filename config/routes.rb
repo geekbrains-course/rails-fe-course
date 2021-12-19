@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
   resources :posts do
+    collection do
+      get :autocomplete
+    end
+
     member do
       post :like
       get :likes

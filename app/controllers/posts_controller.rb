@@ -3,7 +3,13 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.where("title LIKE ? or content LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+    @posts = Post.search(params[:query])
+  end
+
+  # GET /posts/autocomplete
+  def autocomplete
+    @search_results = Post.search(params[:query])
+    render layout: false
   end
 
   # GET /posts/1 or /posts/1.json

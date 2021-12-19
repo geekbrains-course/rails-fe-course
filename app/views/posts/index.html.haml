@@ -1,16 +1,10 @@
 %p#notice= notice
-.container
-  .row.justify-content-center{"data-controller" => "search"}
-    .col-xs-12.col-sm-12
-      = form_with(url: posts_path, method: :get, data: {action: "submit->search#submit"}) do |f|
-        = label_tag(:query, "Search for")
-        = text_field_tag :query, params[:query], data: {target: "search.query"}
-        = submit_tag("Search", class: "btn btn-primary")
-      #posts{"data-target" => "search.posts"}
-        - @posts.each do |post|
-          %div{class: 'container-fluid post'}
-            %div
-              %h2
-                = link_to post.title, post, class: "link-dark",  data: { turbolinks: false }
-            %div
-              = post.content
+= render 'search'
+#posts{"data-target" => "search.posts"}
+  - @posts.each do |post|
+    %div{class: 'container-fluid post'}
+      %div
+        %h2
+          = link_to post.title, post, class: "link-dark",  data: { turbolinks: false }
+      %div
+        = post.content
