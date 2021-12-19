@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     render layout: false
   end
 
+  # GET /posts/search
   def search
     @found_posts = Post.search(params[:query])
     render layout: false
