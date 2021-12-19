@@ -8,13 +8,13 @@ class PostsController < ApplicationController
 
   # GET /posts/autocomplete
   def autocomplete
-    @autocomplete_results = Post.search(params[:query])
+    @autocomplete_results = Post.search_scope(params[:query])
     render layout: false
   end
 
   # GET /posts/search
   def search
-    @found_posts = Post.search(params[:query])
+    @found_posts = Post.search_scope(params[:query])
     render layout: false
   end
 

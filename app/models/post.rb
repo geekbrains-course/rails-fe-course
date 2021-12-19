@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   has_rich_text :content
 
-  scope :search, ->(query) { where("title LIKE ?", "%#{query}%") }
+  scope :search_scope, ->(query) { where("title LIKE ?", "%#{query}%") }
 
   def like!
     increment!(:likes_count)

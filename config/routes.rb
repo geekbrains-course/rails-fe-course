@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'home/index'
   root 'home#index'
@@ -21,6 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
+  devise_for :users
   resource :profiles, only: [:edit, :update, :show]
 
   resources :colors, only: [:create]
