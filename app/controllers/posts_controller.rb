@@ -3,12 +3,17 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.search(params[:query])
+    @posts = Post.all
   end
 
   # GET /posts/autocomplete
   def autocomplete
-    @search_results = Post.search(params[:query])
+    @autocomplete_results = Post.search(params[:query])
+    render layout: false
+  end
+
+  def search
+    @found_posts = Post.search(params[:query])
     render layout: false
   end
 

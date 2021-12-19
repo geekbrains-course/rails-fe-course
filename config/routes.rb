@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :posts do
     collection do
       get :autocomplete
+      get :search
     end
 
     member do
