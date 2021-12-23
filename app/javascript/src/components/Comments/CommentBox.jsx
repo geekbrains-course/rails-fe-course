@@ -1,7 +1,7 @@
 import React from 'react'
 import Comments from './Comments'
 import CommentForm from './CommentForm'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 const token = document.querySelector('meta[name="csrf-token"]').content;
 
 const CommentBox = props => {
@@ -31,7 +31,7 @@ const CommentBox = props => {
     console.log('Success:', data);
   }, [isLoading, data, error]);
 
-  const handleCommentSubmit = React.useCallback((newComment) => {
+  const handleCommentSubmit = (newComment) => 
     fetch('/api/v1/comments', {
       method: 'POST',
       headers: {
@@ -43,14 +43,16 @@ const CommentBox = props => {
         post_id: props.post_id
       })
     })
-    .then(response => response.json())
-    .then((data) => {
+    .then(response => response.json());
+
+  const addComment = useMutation(handleCommentSubmit, {
+    onError: (error) => {
+      console.log('Error:', error);
+    },
+    onSuccess: (data) => {
       let newComments = comments.concat([data]);
       setComments(newComments);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+    }
   })
 
   return (
@@ -60,7 +62,7 @@ const CommentBox = props => {
           <h1>Comment Box</h1>
           <Comments comments={comments} />
           <br/>
-          <CommentForm onCommentSubmit={handleCommentSubmit} />
+          <CommentForm onCommentSubmit={addComment.mutate} />
         </div>
       </div>
     </div>
