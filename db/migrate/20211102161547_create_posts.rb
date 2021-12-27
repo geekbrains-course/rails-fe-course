@@ -1,9 +1,8 @@
 class CreatePosts < ActiveRecord::Migration[6.1]
   def change
     create_table :posts do |t|
-      t.string :name
-      t.string :title
-      t.text :content
+      t.string :title, comment: "Post's title"
+      t.text :content, comment: "Post's body"
 
       t.timestamps
     end
