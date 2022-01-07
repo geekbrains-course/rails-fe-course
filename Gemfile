@@ -35,6 +35,8 @@ gem 'bootstrap', '~> 5.1.0'
 gem 'haml-rails', '~> 2.0'
 gem 'image_processing', '~> 1.2'
 
+gem 'rexml'
+
 gem 'activeadmin'
 
 group :development, :test do
@@ -55,6 +57,8 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
