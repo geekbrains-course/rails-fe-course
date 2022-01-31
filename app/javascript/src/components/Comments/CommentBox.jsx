@@ -6,7 +6,7 @@ const token = document.querySelector('meta[name="csrf-token"]').content;
 class CommentBox extends React.Component {
   constructor (props) {
   	super(props);
-    this.state = {comments : []};
+    this.state = {comments: []};
   }
 
   
