@@ -2,7 +2,7 @@ module Api
   module V1
     class CommentsController < ApplicationController
       def index
-        render json: Comment.includes(:comments).where(post_id: params[:post_id]).to_json(include: [:comments])
+        @comments = Comment.includes(:comments).post_comments.where(commentable_id: params[:post_id])
       end
 
       def create

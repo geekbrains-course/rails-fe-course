@@ -48,8 +48,8 @@ class Comment extends React.Component {
 
     return (
       <Card
-        bg='primary'
-        text='light'
+        border={'dark'}
+        text={'dark'}
         style={{ margin: 10 }}
       >
         <Card.Header>{this.props.author}</Card.Header>
@@ -57,12 +57,11 @@ class Comment extends React.Component {
           <Card.Text>
             {this.props.children}
           </Card.Text>
-        </Card.Body>
-        <Card.Footer>
+
           <SubCommentForm onCommentSubmit={this.handleCommentSubmit.bind(this)} />
           <br />
           <div className="commentList">{commentNodes}</div>
-        </Card.Footer>
+        </Card.Body>
       </Card>
     );
   }
