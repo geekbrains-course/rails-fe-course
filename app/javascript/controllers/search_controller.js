@@ -11,7 +11,7 @@ export default class extends Controller {
 
     Rails.ajax({
       type: "GET",
-      url: `/posts/search?query=${value}`,
+      url: `/posts/search?q=${value}`,
       success: (_data, _status, xhr) => {
         if (this.hasResultsTarget) {
           this.resultsTarget.innerHTML = xhr.response;

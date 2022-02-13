@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     collection do
       get :autocomplete
       get :search
+      get :filter
     end
 
     member do
