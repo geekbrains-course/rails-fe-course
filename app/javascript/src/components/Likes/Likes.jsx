@@ -1,27 +1,35 @@
 import * as React from 'react';
 import { SuitHeartFill } from 'react-bootstrap-icons'
 import { Button } from 'react-bootstrap'
+import { useMutation, useQuery } from 'react-query';
 
 const Likes = props => {
   const [likes, setLikes] = React.useState(props.likes);
   const token = document.querySelector('meta[name="csrf-token"]').content;
 
-  React.useEffect(() => {
+  const { isLoading, data, error } = useQuery(['posts', props.postId, 'likes'], () =>
     fetch(`/posts/${props.postId}/likes`, {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }
     })
     .then(response => response.json())
-    .then(data => {
-      setLikes(data.likes);
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  }, []);
+  )
+
+  React.useEffect(() => {
+    if (isLoading) {
+      return
+    }
+
+    if (error) {
+      console.log('Error:', error);
+      return
+    }
+
+    setLikes(data.likes);
+    console.log('Success:', data);
+  }, [isLoading, data, error]);
 
   const handleNewLike = (e) => {
     fetch(`/posts/${props.postId}/like/`, {
@@ -31,19 +39,22 @@ const Likes = props => {
         'Content-Type': 'application/json',
       },
     })
-    .then(response => response.json())
-    .then(data => {
+    .then(response => response.json());
+  }
+
+  const addLike = useMutation(handleNewLike, {
+    onError: (error) => {
+      console.log('Error:', error);
+    },
+    onSuccess: (data) => {
       setLikes(data.likes);
       console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  }
+    }
+  });
 
   return (
     <div>
-      <Button variant="primary" onClick={handleNewLike} >
+      <Button variant="primary" onClick={addLike.mutate} >
         <SuitHeartFill/> {likes}
       </Button>
     </div>

@@ -4,31 +4,38 @@ import CommentBox from '../Comments/CommentBox'
 import { useParams } from 'react-router-dom';
 import Likes from '../Likes/Likes';
 import contentParser from 'html-react-parser';
+import { useQuery } from 'react-query';
 
 const Post = props => {
   const { id } = useParams();
-  const [name, setName] = React.useState('None');
   const [title, setTitle] = React.useState('None');
   const [desc, setDesc] = React.useState('Empty');
 
-  React.useEffect(() => {
-    fetch(`/posts/${id}.json`, {
+  const { isLoading, data, error } = useQuery(['post', id], () => 
+    fetch(`/posts/${id}`,{
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json'
       }
     })
     .then(response => response.json())
-    .then(data => {
-      setName(data.name);
-      setTitle(data.title);
-      setDesc(data.content.body || 'Empty');
-      console.log('Success:', data);
-    })
-    .catch((error) => {
+  )
+
+  React.useEffect(() => {
+    if (isLoading) {
+      return
+    }
+
+    if (error) {
       console.error('Error:', error);
-    });
-  }, []);
+      return;
+    }
+
+    setTitle(data.title);
+    setDesc(data.content.body || 'Empty');
+    console.log('Success:', data);
+  }, [isLoading, data, error])
 
   return (
     <div className="container">
