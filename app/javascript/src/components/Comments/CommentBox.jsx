@@ -59,7 +59,7 @@ const CommentBox = props => {
     <div className="container">
       <div className="commentBox panel panel-default">
         <div className="panel-body">
-          <h1>Comment Box</h1>
+          <h1>Comments</h1>
           <Comments comments={comments} />
           <br/>
           <CommentForm onCommentSubmit={addComment.mutate} />
