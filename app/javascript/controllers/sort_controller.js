@@ -5,9 +5,9 @@ export default class extends Controller {
   static targets = ['results', 'newBtn', 'oldBtn']
 
   call(event) {
-    const filterType = event.target.dataset.filterTypeValue;
+    const sortType = event.target.dataset.sortTypeValue;
 
-    fetch(`/posts/filter?type=${filterType}`)
+    fetch(`/posts/sort?type=${sortType}`)
       .then(res => res.text())
       .then((html) => {
         if (this.hasResultsTarget) {

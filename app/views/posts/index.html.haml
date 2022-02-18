@@ -3,7 +3,7 @@
 = render 'search'
 %hr
 
-%div{'data-controller' => 'filter'}
-  = render 'filter'
-  #index{'data-filter-target' => 'results'}
-    = render 'filtered_collection'
+%div{'data-controller' => 'sort'}
+  = render 'sort'
+  #index{'data-sort-target' => 'results'}
+    = render 'sorted_collection'

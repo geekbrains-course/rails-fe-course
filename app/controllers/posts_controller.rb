@@ -18,9 +18,9 @@ class PostsController < ApplicationController
     render layout: false
   end
 
-  # GET /posts/filter
-  def filter
-    @posts = Post.all.order(created_at: filter_type)
+  # GET /posts/sort
+  def sort
+    @posts = Post.all.order(created_at: sort_type)
     render layout: false
   end
 
@@ -100,7 +100,7 @@ class PostsController < ApplicationController
       params.require(:post).permit(:title, :content)
     end
 
-    def filter_type
+    def sort_type
       case params[:type]
       when 'old'
         :desc
