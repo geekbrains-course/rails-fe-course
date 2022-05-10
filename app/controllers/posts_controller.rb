@@ -6,6 +6,24 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  # GET /posts/autocomplete
+  def autocomplete
+    @autocomplete_results = Post.search_scope(params[:q])
+    render layout: false
+  end
+
+  # GET /posts/search
+  def search
+    @found_posts = Post.search_scope(params[:q])
+    render layout: false
+  end
+
+  # GET /posts/sort
+  def sort
+    @posts = Post.all.order(created_at: sort_type)
+    render layout: false
+  end
+
   # GET /posts/1 or /posts/1.json
   def show
   end
@@ -80,5 +98,16 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title, :content)
+    end
+
+    def sort_type
+      case params[:type]
+      when 'old'
+        :desc
+      when 'new'
+        :asc
+      else
+        :asc
+      end
     end
 end

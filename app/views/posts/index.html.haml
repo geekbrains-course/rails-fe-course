@@ -1,1 +1,8 @@
 %p#notice= notice
+= render 'search'
+%hr
+
+%div{'data-controller' => 'sort'}
+  = render 'sort'
+  #index{'data-sort-target' => 'results'}
+    = render 'sorted_collection'
